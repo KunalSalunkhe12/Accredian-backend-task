@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { referralSchema } from "../utils/types";
+import { referralSchema } from "../utils/validation";
+import { sendMail } from "../utils/email";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +33,14 @@ export const createReferral = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ createdReferral, success: true });
+    // send email
+    const info = await sendMail(validatedReferral);
+    console.log("Message sent: %s", info.messageId, info.response);
+
+    res.status(200).json({
+      createdReferral,
+      success: true,
+    });
   } catch (error) {
     console.error(error);
     if (error instanceof Error || error instanceof z.ZodError) {

@@ -1,33 +1,33 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import { z } from "zod";
-import { referralSchema } from "./types";
+import { referralSchema } from "./validation";
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
+  service: "Gmail",
+  host: "smtp.gmail.com",
   port: 465,
   secure: true,
   debug: true,
   auth: {
-    user: "info@biisiiventures.com",
-    pass: process.env.SMTP_PASSWORD,
+    user: process.env.GOOGLE_APP_USER,
+    pass: process.env.GOOGLE_APP_PASSWORD,
   },
 });
 
 export const sendMail = async ({
   fullName,
-  email,
   refereeName,
   refereeEmail,
   program,
   message,
 }: z.infer<typeof referralSchema>) => {
   const info = await transporter.sendMail({
-    from: "BIISII VENTURE <info@biisiiventures.com>",
-    to: "info@biisiiventures.com",
-    subject: `New Contact: ${fullName}`,
-    text: `Name: ${fullName}\nEmail: ${email}\nPhone: ${program}\nMessage: ${message}`,
+    from: `Accredian <${process.env.GOOGLE_APP_USER}>`,
+    to: refereeEmail,
+    subject: `Referral for ${program} Program`,
+    text: `Hello ${refereeName},\n\n${fullName} has referred you for the ${program} program. Here is the message from ${fullName}:\n\n${message}\n\nBest Regards,\nAccredian Team`,
   });
 
   return info;
