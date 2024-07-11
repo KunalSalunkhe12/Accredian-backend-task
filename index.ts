@@ -6,6 +6,7 @@ dotenv.config();
 import referralRoutes from "./routes/referral.route";
 
 const app = express();
+const port = process.env.PORT || 4000;
 
 app.use(
   cors({
@@ -24,6 +25,6 @@ app.get("/", (req, res) => {
 
 app.use(referralRoutes);
 
-app.listen(3000, () => {
-  console.log("Server is running");
+app.listen(port, () => {
+  console.log("Server is running on port", port);
 });
