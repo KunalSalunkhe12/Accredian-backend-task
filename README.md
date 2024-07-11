@@ -16,4 +16,4 @@
 
 ## Frontend API
 
-Github Repository: [Accredian Frontend Task]("https://github.com/KunalSalunkhe12/Accredian-frontend-task")
+Github Repository: [Accredian Frontend Task](https://github.com/KunalSalunkhe12/Accredian-frontend-task)
