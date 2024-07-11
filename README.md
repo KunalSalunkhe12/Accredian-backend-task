@@ -17,3 +17,5 @@
 ## Frontend
 
 Github Repository: [Accredian Frontend Task](https://github.com/KunalSalunkhe12/Accredian-frontend-task)
+
+Note: I have used postgresql as it was avaible on render.com
