@@ -1,4 +1,4 @@
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { referralSchema } from "../utils/validation";
@@ -20,6 +20,7 @@ export const createReferral = async (req: Request, res: Response) => {
   const { referral } = req.body;
 
   try {
+    // validate request body using zod
     const validatedReferral = referralSchema.parse(referral);
 
     const createdReferral = await prisma.referral.create({
