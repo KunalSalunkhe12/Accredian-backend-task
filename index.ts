@@ -1,21 +1,25 @@
-import { PrismaClient } from "@prisma/client";
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
-const prisma = new PrismaClient();
+const app = express();
 
-async function main() {
-  const post = await prisma.post.update({
-    where: { id: 1 },
-    data: { published: true },
-  });
-  console.log(post);
-}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect();
+app.use(
+  cors({
+    origin: [process.env.CLIENT_URL || ""],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
   })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Accredian Backend Task" });
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
