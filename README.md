@@ -14,6 +14,8 @@
 3. Add the `.env` file to the root of the project and add the environment variables according to the `.env.example` file
 4. Run `npm run dev` to start the development server
 
-## Frontend API
+## Frontend
 
 Github Repository: [Accredian Frontend Task](https://github.com/KunalSalunkhe12/Accredian-frontend-task)
+
+Note: I have used postgresql as it was avaible on render.com
