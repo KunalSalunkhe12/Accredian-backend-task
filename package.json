@@ -7,7 +7,7 @@
     "dev": "nodemon index.ts",
     "start": "ts-node index.ts",
     "migrate": "prisma migrate dev",
-    "vercel-build": "ts-node index.ts && prisma generate",
+    "vercel-build": "tsc && prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
